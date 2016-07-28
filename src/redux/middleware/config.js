@@ -1,1 +1,5 @@
-export const baseUrl = 'http://kiosk.e-imza.az:88/WSKiosk/api/'
+// URL to API
+export const baseUrl = 'http://localhost:8197/api/'
+
+// Site languages
+export const languages = ['az', 'en', 'ru']
