@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { actions as counterActions } from '../../redux/modules/counter'
 import DuckImage from './Duck.jpg'
-import classes from './HomeView.scss'
+import { Button } from 'react-toolbox/lib/button'
+import Checkbox from 'react-toolbox/lib/checkbox'
 
 // We define mapStateToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
@@ -14,6 +15,12 @@ const mapStateToProps = (state) => ({
   counter: state.counter
 })
 export class HomeView extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      check1: true
+    }
+  }
   static propTypes = {
     counter: PropTypes.number.isRequired,
     doubleAsync: PropTypes.func.isRequired,
@@ -25,8 +32,7 @@ export class HomeView extends React.Component {
       <div className='container text-center'>
         <div className='row'>
           <div className='col-xs-2 col-xs-offset-5'>
-            <img className={classes.duck}
-                 src={DuckImage}
+            <img src={DuckImage}
                  alt='This is a duck, because Redux.' />
           </div>
         </div>
@@ -34,7 +40,7 @@ export class HomeView extends React.Component {
         <h2>
           Sample Counter:
           {' '}
-          <span className={classes['counter--green']}>{this.props.counter}</span>
+          <span>{this.props.counter}</span>
         </h2>
         <button className='btn btn-default'
                 onClick={() => this.props.increment(1)}>
@@ -45,10 +51,21 @@ export class HomeView extends React.Component {
                 onClick={this.props.doubleAsync}>
           Double (Async)
         </button>
+        <Button icon='bookmark' label='Bookmark' primary />
+        <Checkbox
+          checked={this.state.check1}
+          label='Checked option'
+          onChange={this.handleChange.bind(this)}
+        />
         <hr />
         <Link to='/404'>Go to 404 Page</Link>
       </div>
     )
+  }
+  handleChange () {
+    this.setState({
+      check1: this.state.check1
+    })
   }
 }
 

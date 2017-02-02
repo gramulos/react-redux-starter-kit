@@ -16,7 +16,7 @@ const webpackConfig = {
   devtool: config.compiler_devtool,
   resolve: {
     root: paths.base(config.dir_client),
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx', '.scss', '.css']
   },
   module: {}
 }
@@ -133,7 +133,7 @@ const cssLoader = !config.compiler_css_modules
 
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
-  include: /src/,
+  include: /(src|react-toolbox)/,
   loaders: [
     'style',
     cssLoader,
@@ -144,7 +144,7 @@ webpackConfig.module.loaders.push({
 
 webpackConfig.module.loaders.push({
   test: /\.css$/,
-  include: /src/,
+  include: /(src|react-toolbox)/,
   loaders: [
     'style',
     cssLoader,
@@ -155,7 +155,7 @@ webpackConfig.module.loaders.push({
 // Don't treat global SCSS as modules
 webpackConfig.module.loaders.push({
   test: /\.scss$/,
-  exclude: /src/,
+  exclude: /(src|react-toolbox)/,
   loaders: [
     'style',
     'css?sourceMap',
@@ -167,7 +167,7 @@ webpackConfig.module.loaders.push({
 // Don't treat global, third-party CSS as modules
 webpackConfig.module.loaders.push({
   test: /\.css$/,
-  exclude: /src/,
+  exclude: /(src|react-toolbox)/,
   loaders: [
     'style',
     'css?sourceMap',
